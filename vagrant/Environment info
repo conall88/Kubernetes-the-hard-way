@@ -1,0 +1,94 @@
+Environment info
+
+VM	VM Name	Purpose	IP	Forwarded Port
+master-1	kubernetes-ha-master-1	Master	192.168.5.11	2711
+worker-1	kubernetes-ha-worker-1	Worker	192.168.5.21	2721
+worker-2	kubernetes-ha-worker-2	Worker	192.168.5.22	2722
+loadbalancer	kubernetes-ha-lb	LoadBalancer	192.168.5.30	2730
+
+SSH keys managed by vagrant using the default specified via Vagrantfile
+
+additional SSH keys:
+
+master-1:
+
+private key located at /home/vagrant/.ssh/id_rsa
+public key located at /home/vagrant/.ssh/id_rsa.pub
+
+PKI has been configured from the master-1 node (as per https://github.com/mmumshad/kubernetes-the-hard-way/blob/master/docs/04-certificate-authority.md ) :
+
+vagrant@master-1:~/PKI$ tree   (from /home/vagrant/PKI/ )
+.
+├── AdminClient
+│   ├── admin.csr
+│   ├── admin.key
+│   └── adminclient.crt
+├── KubesCA
+│   ├── ca.crt
+│   ├── ca.csr
+│   ├── ca.key
+│   └── ca.srl
+├── etcd
+│   ├── etcd-server.crt
+│   ├── etcd-server.csr
+│   ├── etcd-server.key
+│   └── openssl-etcd.cnf
+├── kube-apiserver
+│   ├── kube-apiserver.crt
+│   ├── kube-apiserver.csr
+│   ├── kube-apiserver.key
+│   └── openssl.cnf
+├── kube-controller-manager
+│   ├── kube-controller-manager.crt
+│   ├── kube-controller-manager.csr
+│   └── kube-controller-manager.key
+├── kube-proxy
+│   ├── kube-proxy.crt
+│   ├── kube-proxy.csr
+│   └── kube-proxy.key
+└── kube-scheduler
+    ├── kube-scheduler.crt
+    ├── kube-scheduler.csr
+    └── kube-scheduler.key
+
+Below are the certificates for the Kubernetes Certificate authority:
+
+folder name: /home/vagrant/PKI/KubesCA
+files:
+ca.crt (public cert)
+
+VValidity
+  Not Before:     26/06/2022 19:06:33 (dd-mm-yyyy hh:mm:ss) (220626190633Z)
+  Not After:      22/03/2025 19:06:33 (dd-mm-yyyy hh:mm:ss) (250322190633Z)
+Issuer
+  CN = KUBERNETES-CA
+Subject
+  CN = KUBERNETES-CA
+Public Key
+  Algorithm:      RSA
+  Length:         2048 bits
+
+ca.key  (private key)
+ca.csr (no longer needed)
+
+Admin Client cert:
+
+folder: /home/vagrant/PKI/AdminClient
+file: adminclient.crt / admin.key
+
+Serial number:    224634882517070296619494597320689916610120117535 (0x2758f9fc7db9721155b283432ed81c3974f9ed1f)
+Algorithm ID:     SHA256withRSA
+Validity
+  Not Before:     26/06/2022 19:09:34 (dd-mm-yyyy hh:mm:ss) (220626190934Z)
+  Not After:      22/03/2025 19:09:34 (dd-mm-yyyy hh:mm:ss) (250322190934Z)
+Issuer
+  CN = KUBERNETES-CA
+Subject
+  CN = admin
+  O  = system:masters
+Public Key
+  Algorithm:      RSA
+  Length:         2048 bits
+
+  ----
+

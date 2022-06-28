@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-
+	
   #workaround for sshkey permissions check issue
   config.ssh.insert_key = false
   #this will instead use the default insecure key, located at VAGRANT_HOME
@@ -71,8 +71,8 @@ Vagrant.configure("2") do |config|
             vb.cpus = 2
         end
         node.vm.hostname = "master-#{i}"
-        node.vm.network :private_network, ip: IP_NW + "#{MASTER_IP_START + i}", hostname: true
-        node.vm.network "forwarded_port", guest: 22, host: "#{2710 + i}"
+        config.vm.network :private_network, ip: IP_NW + "#{MASTER_IP_START + i}"
+        config.vm.network "forwarded_port", guest: 22, host: "#{2710 + i}"
 
         node.vm.provision "setup-hosts", :type => "shell", :path => "ubuntu/vagrant/setup-hosts.sh" do |s|
           s.args = ["enp0s8"]
